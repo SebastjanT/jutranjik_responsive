@@ -1,3 +1,4 @@
-const test: string = 'Yes';
+require('dotenv').config();
 
-console.log(test);
+//  Create the winston logger
+require('./log/logger.ts');
