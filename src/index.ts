@@ -1,15 +1,18 @@
 require('dotenv').config();
 
 const { ApolloServer } = require('apollo-server');
+const schedule = require('node-schedule');
 
 //  Create the winston logger
-require('./log/logger');
+const logger = require('./log/logger');
 
 const typeDefs = require('./models/schema');
 const resolvers = require('./models/resolvers');
 const { createStore } = require('./models/db');
 
 const GenerationsAPI = require('./datasources/generations');
+
+const periodicGeneration = require('./schedule/periodicGeneration');
 
 //  Create the sequelize store
 const store = createStore();
@@ -27,3 +30,6 @@ const server = new ApolloServer({
 server.listen({ port: process.env.PORT || 4000 }).then(({ url }: any) => {
   console.log(`Server ready at ${url}`);
 });
+
+// Set and start the scheduled task
+schedule.scheduleJob(process.env.PG_CRON, (fireDate: Date) => periodicGeneration(fireDate, logger));
