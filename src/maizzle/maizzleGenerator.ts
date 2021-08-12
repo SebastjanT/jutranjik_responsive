@@ -18,6 +18,14 @@ type GenerationMaizzle = {
     isPublic?: boolean,
 }
 
+type MailOptionsMaizzle = {
+  from: string,
+  to: string,
+  subject: string,
+  html: string,
+  text?: string,
+}
+
 module.exports = class maizzleGenerator {
   public store: any;
 
@@ -25,23 +33,44 @@ module.exports = class maizzleGenerator {
 
   public plaintext: boolean;
 
-  public nodemailer: any;
+  public nodemailerTransport: any;
 
-  constructor(store: any, logger: any, plaintext: boolean, nodemailer: any) {
+  constructor(store: any, logger: any, plaintext: boolean, nodemailerTransport: any) {
     this.store = store;
     this.logger = logger;
     this.plaintext = plaintext;
-    this.nodemailer = nodemailer;
+    this.nodemailerTransport = nodemailerTransport;
   }
 
-  //  Callback after the maizzle render process
-  async afterMaizzleRender(html: string, filename: string) {
-    //  Depending on the environmental settings and maizzle success send email or save it to a file
-    let text = null;
+  //  Sending function
+  maizzleSend(maillist: string, subject: string, html: string, text: string) {
+    //  Email options
+    const mailOptions: MailOptionsMaizzle = {
+      from: process.env.NODEMAILER_FROM ? process.env.NODEMAILER_FROM : '',
+      to: maillist,
+      subject,
+      html,
+    };
     if (this.plaintext) {
-      const data = await Maizzle.plaintext(html);
-      text = data.plaintext;
+      mailOptions.text = text;
     }
+
+    this.nodemailerTransport.sendMail(mailOptions, (err: any, info: any) => {
+      if (err) {
+        this.logger.error({
+          message: err,
+        });
+      } else {
+        this.logger.info({
+          message: `Email sent: ${info.response}`,
+        });
+      }
+    });
+  }
+
+  //  Save the html and text files the maizzle render process
+  async afterMaizzleRender(html: string, text: string, filename: string) {
+    //  Depending on the environmental settings and maizzle success save the email
     //  Check if generations directory exists
     if (!fs.existsSync('./data/generations')) {
       try {
@@ -124,14 +153,28 @@ module.exports = class maizzleGenerator {
             },
           },
         );
+        //  Generate the plaintext version
+        let text = null;
+        if (this.plaintext) {
+          const { plaintext } = await Maizzle.plaintext(html);
+          text = plaintext;
+        }
         // Save the generated html and plaintext files to the filesystem
-        if (await this.afterMaizzleRender(html, generationMaizzle.filename)) {
+        if (await this.afterMaizzleRender(html, text, generationMaizzle.filename)) {
+          //  After a successful save finish up the generation and if enabled send the email
           generationMaizzle.generationTimeEnd = new Date();
           generationMaizzle.lineCountAfter = html.split(/\r\n|\r|\n/).length;
           generationMaizzle.fileSize = fs.statSync(`./data/generations/${generationMaizzle.filename}.html`).size;
           if (send) {
             generationMaizzle.isPublic = send;
-            console.log('Send the email!');
+            //  Backup address that the email will be delivered to as a notification of a problem
+            let maillist = process.env.NODEMAILER_TO ? process.env.NODEMAILER_TO : '';
+            if (process.env.DATA_API !== 'development') {
+              //  Get the maillist from the API
+              console.log('API');
+              maillist = '';
+            }
+            this.maizzleSend(maillist, generationMaizzle.title ? generationMaizzle.title : '', html, text);
           }
           // Store the generation to the database
           const storeOperation = await this.store.Generations.create(generationMaizzle);

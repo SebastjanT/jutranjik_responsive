@@ -29,6 +29,8 @@ The system accepts the following ENV variables:
 | `DATA_API`        | `someurl | development` | The url of the news data api or the value development, to use predefined data for testing |
 | `GENERATOR`       | `Maizzle | mjml`    | The generator used by the periodicGeneration task
 | `SEND`            | `false`             | The periodicGeneration task setting for triggering sending the generated email
+| `NODEMAILER_FROM` |                     | The from email address used for sending the emails
+| `NODAMAILER_TO`   |                     | The backup email address that is used when the maillist couldn't be retrieved
 
 
 ## Usage

@@ -6,6 +6,9 @@ const schedule = require('node-schedule');
 //  Create the winston logger
 const logger = require('./log/logger');
 
+//  Create and configure the nodemailer transport
+const nodemailerTransport = require('./nodemailer/nodemailer');
+
 const typeDefs = require('./models/schema');
 const resolvers = require('./models/resolvers');
 const { createStore } = require('./models/db');
@@ -20,7 +23,7 @@ const periodicGeneration = require('./schedule/periodicGeneration');
 const store = createStore();
 
 //  Create the maizzle generator
-const maizzleGenerator = new MaizzleGenerator(store, logger, true, null);
+const maizzleGenerator = new MaizzleGenerator(store, logger, true, nodemailerTransport);
 
 // Define and create the ApolloServer
 const server = new ApolloServer({
