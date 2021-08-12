@@ -1,0 +1,20 @@
+/*! purgecss start ignore */
+body {
+  @apply m-0 p-0 w-full;
+  word-break: break-word;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  border: 0;
+  @apply max-w-full leading-full align-middle;
+}
+
+a[x-apple-data-detectors] {
+  @apply text-inherit no-underline !important;
+  font-size: inherit !important;
+  font-family: inherit !important;
+  font-weight: inherit !important;
+  line-height: inherit !important;
+}
+/*! purgecss end ignore */

@@ -1,0 +1,430 @@
+---
+plaintext: true
+title: "jutranjik_responsive"
+preheader: "Jutranjik maizzle responsive template."
+date: "11. avgust 2021"
+glava: "**Ta del naj bo del GLAVE**, torej templejta, in naj se prikazuje le, če je v uporabi: Če se vanj nič ne vnese, se ne prikaže. Če se vanj kaj vnese, se prikazuje tako dolgo, dokler se tega v templejtu ne zbirše ven. Le za tekst in hiperpovezave - če je možno tudi za slike, pa tudi nič narobe."
+noga: "**Ta del naj bo del NOGE, torej templejta**, in naj se prikazuje le, če je v uporabi: Če se vanj nič ne vnese, se ne prikaže. Če se vanj kaj vnese, se prikazuje tako dolgo, dokler se tega v templejtu ne zbirše ven. Le za tekst in hiperpovezave - če je možno tudi za slike, pa tudi nič narobe."
+noviceIntranet: [
+                  {
+                    naslov: "Naslov, ki je malo daljši in se prelomi v dve vrstici ali več",
+                    besedilo: "Tole je uvodno besedilo, ki se generira v Jutranjik iz uvodnega odstavko, za ostalo pa je treba izbrati gumb Več.",
+                    tip: "Splošne novice",
+                    url: "https://fri.uni-lj.si"
+                  },
+                  {
+                    naslov: "Naslov 2",
+                    besedilo: "Tole je uvodno besedilo, ki se generira v Jutranjik iz uvodnega odstavko, za ostalo pa je treba izbrati gumb Več.",
+                    tip: "Raziskovalne novice",
+                    url: "https://fri.uni-lj.si"
+                  },
+                  {
+                    naslov: "Naslov 3",
+                    besedilo: "Tole je uvodno besedilo, ki se generira v Jutranjik iz uvodnega odstavko, za ostalo pa je treba izbrati gumb Več.",
+                    tip: "Splošne novice",
+                    url: "https://fri.uni-lj.si"
+                  }
+                ]
+noviceSpletna: [
+                  {
+                    naslov: "279 novih diplomantov UL FRI",
+                    besedilo: "Tole je uvodno besedilo, ki se generira v Jutranjik iz uvodnega odstavko, za ostalo pa je treba izbrati gumb Več.",
+                    tip: "Novice",
+                    url: "https://fri.uni-lj.si",
+                    urlSlika: "https://friint.fri1.uni-lj.si/upload/IT%20infrastruktura/tricol/slika1.png"
+                  },
+                  {
+                    naslov: "Razpis za študijske izmenjave in praktično usposabljanje",
+                    besedilo: "Tole je uvodno besedilo, ki se generira v Jutranjik iz uvodnega odstavko, za ostalo pa je treba izbrati gumb Več.",
+                    tip: "Obvestila referata",
+                    url: "https://fri.uni-lj.si",
+                    urlSlika: "https://friint.fri1.uni-lj.si/upload/IT%20infrastruktura/tricol/slika2.png"
+                  },
+                  {
+                    naslov: "Nagrade Univerze v Ljubljani",
+                    besedilo: "Tole je uvodno besedilo, ki se generira v Jutranjik iz uvodnega odstavko, za ostalo pa je treba izbrati gumb Več.",
+                    tip: "V medijih",
+                    url: "https://fri.uni-lj.si",
+                    urlSlika: "https://friint.fri1.uni-lj.si/upload/IT%20infrastruktura/tricol/slika3.png"
+                  },
+                  {
+                    naslov: "Virtualni sprehod po Sloveniji v igri Minecraft",
+                    besedilo: "Tole je uvodno besedilo, ki se generira v Jutranjik iz uvodnega odstavko, za ostalo pa je treba izbrati gumb Več.",
+                    tip: "Novice",
+                    url: "https://fri.uni-lj.si",
+                    urlSlika: "https://friint.fri1.uni-lj.si/upload/IT%20infrastruktura/tricol/slika4.png"
+                  },
+                ]
+neZamudite: [
+              {
+                naslov: "Sejem Informativa 2017",
+                od: {dan: "27", mesec: "jan"},
+                do: {dan: "28", mesec: "jan"},
+                ura: "09:00"
+              },
+              {
+                naslov: "Infomativni dan",
+                od: {dan: "10", mesec: "feb"},
+                do: {dan: "11", mesec: "feb"},
+                ura: "11:00"
+              }
+            ]
+napovediDog: [
+              {
+                naslov: "JobFair 2017",
+                od: {dan: "13", mesec: "mar"},
+                do: {dan: "16", mesec: "mar"},
+                ura: "00:00",
+                tip: "Obvestila referata",
+                urlSlika: "https://friint.fri1.uni-lj.si/upload/IT%20infrastruktura/tricol/slika1.png"
+              },
+              {
+                naslov: "WebCamp 2017",
+                od: {dan: "22", mesec: "apr"},
+                do: {},
+                ura: "00:00",
+                tip: "Konferenca",
+                urlSlika: "https://friint.fri1.uni-lj.si/upload/IT%20infrastruktura/tricol/slika3.png"
+              }
+              ]
+---
+
+<extends src="src/maizzle/layouts/master.html">
+  <block name="template">
+    <!--[if (gte mso)]>
+      <table align="center" border="0" cellspacing="0" cellpadding="0" width="900">
+        <tr>
+          <td align="center" valign="top" width="900">
+            <![endif]-->
+            <table class="w-full all:font-sans" align="center">
+              <tr>
+                <!--Header-->
+                <td align="center" class="pt-70 px-15 sm:pt-20 sm:px-15 bg-white">
+                  <table class="w-11/12 max-w-picture sm:w-full">
+                    <tr>
+                      <td>
+                        <table class="w-full pb-15 text-black pt-6">
+                          <tr>
+                            <td class="w-1/3 sm:w-full sm:inline-block">
+                              <!--[if gte vml 1]>
+                              <v:shapetype
+                               id="_x0000_t75" coordsize="21600,21600" o:spt="75" o:preferrelative="t"
+                               path="m@4@5l@4@11@9@11@9@5xe" filled="f" stroked="f">
+                               <v:stroke joinstyle="miter"/>
+                               <v:formulas>
+                                <v:f eqn="if lineDrawn pixelLineWidth 0"/>
+                                <v:f eqn="sum @0 1 0"/>
+                                <v:f eqn="sum 0 0 @1"/>
+                                <v:f eqn="prod @2 1 2"/>
+                                <v:f eqn="prod @3 21600 pixelWidth"/>
+                                <v:f eqn="prod @3 21600 pixelHeight"/>
+                                <v:f eqn="sum @0 0 1"/>
+                                <v:f eqn="prod @6 1 2"/>
+                                <v:f eqn="prod @7 21600 pixelWidth"/>
+                                <v:f eqn="sum @8 21600 0"/>
+                                <v:f eqn="prod @7 21600 pixelHeight"/>
+                                <v:f eqn="sum @10 21600 0"/>
+                               </v:formulas>
+                               <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>
+                               <o:lock v:ext="edit" aspectratio="t"/>
+                              </v:shapetype>
+                              <v:shape type="#_x0000_t75" alt=""
+                               style='position:absolute;margin-left:0;margin-top:0;width:200pt;
+                               height:75pt;mso-wrap-distance-left:0;
+                               mso-wrap-distance-top:0;mso-wrap-distance-right:0;
+                               mso-wrap-distance-bottom:0;mso-position-horizontal:left;
+                               mso-position-horizontal-relative:text;
+                               mso-position-vertical-relative:line' fillcolor="white" filled="t" o:allowoverlap="f">
+                              >
+                               <v:imagedata src="https://friint.fri1.uni-lj.si/upload/IT%20infrastruktura/tricol/fri_logo.png"/>
+                               <w:wrap type="square"/>
+                              </v:shape><![endif]-->
+                              <img class="w-240" src="https://friint.fri1.uni-lj.si/upload/IT%20infrastruktura/tricol/fri_logo.png" />
+                            </td>
+                            <td class="w-1/3 font-bold text-4xl text-center sm:w-full sm:inline-block sm:pt-10">
+                              JUTRANJIK
+                            </td>
+                            <td class="w-1/3 text-right align-bottom sm:w-full sm:inline-block">{{ page.date }}</td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td align="center" height=3 style="vertical-align: bottom;height: 3px;font-size: 1px;line-height: 1px;border-bottom: 2px dashed #9fa6b2;"></td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <if condition="page.glava">
+                <tr>
+                  <!--Glava, md-->
+                  <td align="center" class="pt-10 px-15 sm:px-15 sm:pt-10 bg-white">
+                    <table class="w-11/12 max-w-picture sm:w-full bg-gray-200 border-gray-200 rounded">
+                      <tr>
+                        <td class="px-15"><p><md>{{ page.glava }}</md></p></td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </if>
+              <tr>
+                <!--Vsebina-->
+                <td align="center" class="pt-10 px-15 sm:px-15 sm:pt-10 bg-white">
+                  <table class="w-11/12 max-w-picture sm:w-full">
+                    <tr>
+                      <td class="w-2/3 sm:w-full sm:inline-block">
+                        <!--Novice-->
+                        <table>
+                          <!--Novice z intraneta-->
+                          <tr>
+                            <td class="font-bold text-3xl text-gray-600 sm:w-full sm:inline-block" colspan="2">NOVICE Z INTRANETA</td>
+                          </tr>
+                          <each loop="waste, index1 in page.noviceIntranet">
+                            <if condition="index1%2==0">
+                              <tr>
+                                <each loop="item, index2 in page.noviceIntranet">
+                                  <if condition="index2==index1 || index2==index1+1">
+                                    <td class="w-1/2 pr-25 pt-10 align-top sm:w-full sm:inline-block">
+                                      <!--Vsebina-->
+                                      <h3 class="mb-0">{{ item.naslov }}</h3>
+                                      <p class="mt-0">{{ item.besedilo }}</p>
+                                      <table class="w-full">
+                                        <tr>
+                                          <td>
+                                            <table align="left">
+                                              <tr>
+                                                <td align="center" class="bg-gray-400 p-5 text-xxs">
+                                                  {{ item.tip }}
+                                                </td>
+                                              </tr>
+                                            </table>
+                                          </td>
+                                          <td align="right" class="w-70">
+                                            <!-- BULLETPROOF BUTTON -->
+                                            <table class="w-full">
+                                              <tr align="right">
+                                                <td align="center" class="bg-red-700">
+                                                  <a href="{{ item.url }}" class="inline-block sm:block p-5 sm:border-0 rounded-sm no-underline text-xxs text-white focus:text-white">Več</a>
+                                                </td>
+                                              </tr>
+                                            </table>
+                                          </td>
+                                        </tr>
+                                      </table>
+                                    </td>
+                                  </if>
+                                </each>
+                              </tr>
+                            </if>
+                          </each>
+                          <!--Novice s spletne strani-->
+                          <tr>
+                            <td class="font-bold text-3xl text-gray-600 pt-25 sm:w-full sm:inline-block" colspan="2">NOVICE S SPLETNE STRANI</td>
+                          </tr>
+                          <each loop="waste, index1 in page.noviceSpletna">
+                            <if condition="index1%2==0">
+                              <tr>
+                                <each loop="item, index2 in page.noviceSpletna">
+                                  <if condition="index2==index1 || index2==index1+1">
+                                    <td class="w-1/2 pr-25 pt-10 align-top sm:w-full sm:inline-block">
+                                      <!--Vsebina-->
+                                      <!--[if gte vml 1]>
+                                        <v:shape type="#_x0000_t75" alt=""
+                                         style='position:absolute;
+                                         margin-left:0;margin-top:0;width:176pt;height:93pt;
+                                         mso-wrap-distance-left:0;mso-wrap-distance-top:0;
+                                         mso-wrap-distance-right:0;mso-wrap-distance-bottom:0;
+                                         mso-position-horizontal:left;mso-position-horizontal-relative:text;
+                                         mso-position-vertical-relative:line' o:allowoverlap="f"
+                                        >
+                                         <v:imagedata src="{{ item.urlSlika }}" />
+                                         <w:wrap type="square"/>
+                                        </v:shape><![endif]-->
+                                      <outlook>
+                                        <table align="center" border="0" cellspacing="0" cellpadding="0">
+                                          <tr>
+                                            <td align="center" valign="top">
+                                              <img width="200" height="90" src="{{ item.urlSlika }}" />
+                                            </td>
+                                          </tr>
+                                        </table>
+                                      </outlook>
+                                      <not-outlook>
+                                        <img src="{{ item.urlSlika }}" />
+                                      </not-outlook>
+                                      <h3 class="mb-0">{{ item.naslov }}</h3>
+                                      <p class="mt-0">{{ item.besedilo }}</p>
+                                      <table class="w-full">
+                                        <tr>
+                                          <td>
+                                            <table align="left">
+                                              <tr>
+                                                <td align="center" class="bg-gray-400 p-5 text-xxs">
+                                                  {{ item.tip }}
+                                                </td>
+                                              </tr>
+                                            </table>
+                                          </td>
+                                          <td align="right" class="w-70">
+                                            <!-- BULLETPROOF BUTTON -->
+                                            <table class="w-full">
+                                              <tr align="right">
+                                                <td align="center" class="bg-red-700">
+                                                  <a href="{{ item.url }}" class="inline-block sm:block p-5 sm:border-0 rounded-sm no-underline text-xxs text-white focus:text-white">Več</a>
+                                                </td>
+                                              </tr>
+                                            </table>
+                                          </td>
+                                        </tr>
+                                      </table>
+                                    </td>
+                                  </if>
+                                </each>
+                              </tr>
+                            </if>
+                          </each>
+                        </table>
+                      </td>
+                      <td class="sm:hidden" align="center" width=3 style="vertical-align: top;width: 3px;font-size: 1px;border-right: 2px dashed #9fa6b2;"></td>
+                      <td class="w-1/3 align-top sm:w-full sm:inline-block sm:pt-30">
+                        <table class="pl-25 sm:pl-0">
+                          <!--Koledar-->
+                          <tr>
+                            <td class="font-bold text-3xl text-gray-600">KOLEDAR</td>
+                          </tr>
+                          <!--Ne zamudite-->
+                          <tr>
+                            <td class="font-bold text-2xl pt-15">Ne zamudite</td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <!--Vsebina-->
+                              <each loop="item, index in page.neZamudite">
+                                <table class="pt-10">
+                                  <tr>
+                                    <td class="w-1/4 pr-10">
+                                      <table class="border-gray-300 border-2 border-solid">
+                                        <tr><td class="text-center p-5">
+                                          <if condition="item.do.dan">
+                                            <p class="m-0 p-0 text-xs"><strong>{{ item.od.dan }}</strong>. {{ item.od.mesec }}<br />-<br /><strong>{{ item.do.dan }}</strong>. {{ item.do.mesec }}</p>
+                                          </if>
+                                          <else>
+                                            <p class="m-0 px-10 py-2 text-base"><strong>{{ item.od.dan }}</strong>.<br />{{ item.od.mesec }}</p>
+                                          </else>
+                                        </td></tr>
+                                      </table>
+                                    </td>
+                                    <td class="w-3/4 pl-10 align-middle">
+                                      <p class="text-lg font-bold my-22">{{ item.naslov }}</p>
+                                      <p class="text-gray-400 my-22">od {{ item.ura }}</p>
+                                    </td>
+                                  </tr>
+                                </table>
+                              </each>
+                              <p><a href="https://fri.uni-lj.si/sl/koledar-dogodkov" class="text-xs pt-25 text-black no-underline focus:text-black">KOLEDAR VSEH DOGODKOV <span class="text-red-600 text-lg">&rarr;</span></a></p>
+                            </td>
+                          </tr>
+                          <!--Nove napovedi dogodkov-->
+                          <tr>
+                            <td class="font-bold text-2xl pt-25">Nove napovedi dogodkov</td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <!--Vsebina-->
+                              <each loop="item, index in page.napovediDog">
+                                <!--[if gte vml 1]>
+                                  <v:shape type="#_x0000_t75" alt=""
+                                   style='position:absolute;
+                                   margin-left:0;margin-top:0;width:176pt;height:93pt;
+                                   mso-wrap-distance-left:0;mso-wrap-distance-top:0;
+                                   mso-wrap-distance-right:0;mso-wrap-distance-bottom:0;
+                                   mso-position-horizontal:left;mso-position-horizontal-relative:text;
+                                   mso-position-vertical-relative:line' o:allowoverlap="f"
+                                  >
+                                   <v:imagedata src="{{ item.urlSlika }}" />
+                                   <w:wrap type="square"/>
+                                  </v:shape><![endif]-->
+                                <outlook>
+                                  <table align="center" border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                      <td align="center" valign="top">
+                                        <img class="pt-25" width="200" height="90" src="{{ item.urlSlika }}" />
+                                      </td>
+                                    </tr>
+                                  </table>
+                                </outlook>
+                                <not-outlook>
+                                  <img class="pt-25" src="{{ item.urlSlika }}" />
+                                </not-outlook>
+                                <table class="py-20">
+                                  <tr>
+                                    <td class="w-1/4 pr-10">
+                                      <table class="border-gray-300 border-2 border-solid">
+                                        <tr><td class="text-center p-5">
+                                          <if condition="item.do.dan">
+                                            <p class="m-0 p-0 text-xs"><strong>{{ item.od.dan }}</strong>. {{ item.od.mesec }}<br />-<br /><strong>{{ item.do.dan }}</strong>. {{ item.do.mesec }}</p>
+                                          </if>
+                                          <else>
+                                            <p class="m-0 px-10 py-2 text-base"><strong>{{ item.od.dan }}</strong>.<br />{{ item.od.mesec }}</p>
+                                          </else>
+                                        </td></tr>
+                                      </table>
+                                    </td>
+                                    <td class="w-3/4 pl-10 align-middle">
+                                      <p class="text-lg font-bold my-0">{{ item.naslov }}</p>
+                                      <p class="text-gray-400 my-0">od {{ item.ura }}</p>
+                                      <p class="text-gray-400 my-0 text-10">{{ item.tip }}</p>
+                                    </td>
+                                  </tr>
+                                </table>
+                              </each>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <if condition="page.noga">
+                <tr>
+                  <!--Noga, md-->
+                  <td align="center" class="pt-50 px-15 sm:px-15 sm:pt-40 bg-white">
+                    <table class="w-11/12 max-w-picture sm:w-full bg-gray-200 border-gray-200 rounded">
+                      <tr>
+                        <td class="px-15"><p><md>{{ page.noga }}</md></p></td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </if>
+              <tr>
+                <!--Footer-->
+                <td align="center" class="pt-30 px-15 sm:pt-15 sm:px-15 bg-white">
+                  <table class="w-11/12 max-w-picture sm:w-full">
+                    <tr>
+                      <td>
+                        <table class="w-full pb-15 text-black">
+                          <tr>
+                            <td align="center" height=3 style="vertical-align: top;height: 3px;font-size: 1px;line-height: 1px;border-top: 2px dashed #9fa6b2;"></td>
+                          </tr>
+                          <tr>
+                            <td class="text-center">
+                              <p class="font-bold">Jutranjik vsak dan posreduje zadnje novice s spletne strani FRI in objave z intraneta FRI.<br />Kategorije novic in objav, ki jih želite videti, lakho urejate na tej <a href="https://fri.uni-lj.si" class="text-red-600 no-underline focus:text-red-600">povezavi</a>.</p>
+                              <p>UL FRI, Večna pot 113, Ljubljana - fri.uni-lj.si - sk@fri.uni-lj.si</p>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+            <!--[if (gte mso)]>
+          </td>
+        </tr>
+      </table>
+    <![endif]-->
+  </block>
+</extends>

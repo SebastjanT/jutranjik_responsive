@@ -17,9 +17,10 @@ type Generation = {
 }
 
 module.exports = class GenerationsAPI extends DataSource {
-  constructor({ store }: any) {
+  constructor({ store, maizzleGenerator }: any) {
     super();
     this.store = store;
+    this.maizzleGenerator = maizzleGenerator;
   }
 
   initialize(config: any) {
@@ -34,26 +35,12 @@ module.exports = class GenerationsAPI extends DataSource {
 
   //  Function that starts the generation process manually
   async startGeneration({ generator }: any = {}) {
-    //  Currently only creates dummy data
-    const generation = await this.store.Generations.create({
-      title: 'test',
-      filename: 'test.html',
-      generationTimeStart: new Date(),
-      generationTimeEnd: new Date(),
-      fileSize: 0,
-      lineCountBefore: 0,
-      lineCountAfter: 0,
-      hasText: false,
-      usedGenerator: generator,
-      actualData: false,
-      recipientsNum: 0,
-      isPublic: false,
-    });
-
-    if (!generation.dataValues) {
+    if (generator === 'Maizzle') {
+      return this.maizzleGenerator.runMaizzle(false);
+    }
+    if (generator === 'mjml') {
       return null;
     }
-
-    return generation.dataValues;
+    return null;
   }
 };

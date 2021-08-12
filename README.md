@@ -26,6 +26,9 @@ The system accepts the following ENV variables:
 | `NODE_ENV`        | `development`       | The environment that the system is ran in |
 | `PG_CRON`         | `0 8 * * *`         | The cron-style scheduling for the periodicGeneration task |
 | `TZ`              | `Europe/Ljubljana`  | The timezone that is used in the Date function |
+| `DATA_API`        | `someurl | development` | The url of the news data api or the value development, to use predefined data for testing |
+| `GENERATOR`       | `Maizzle | mjml`    | The generator used by the periodicGeneration task
+| `SEND`            | `false`             | The periodicGeneration task setting for triggering sending the generated email
 
 
 ## Usage

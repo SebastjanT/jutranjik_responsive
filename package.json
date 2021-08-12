@@ -26,6 +26,7 @@
   },
   "homepage": "https://github.com/SebastjanT/jutranjik_responsive#readme",
   "dependencies": {
+    "@maizzle/framework": "^3.7.1",
     "apollo-datasource": "^3.0.3",
     "apollo-server": "^3.1.2",
     "dotenv": "^10.0.0",
