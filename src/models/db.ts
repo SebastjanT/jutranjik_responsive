@@ -59,6 +59,7 @@ module.exports.createStore = () => {
     actualData: {
       type: Sequelize.BOOLEAN,
       allowNull: false,
+      defaultValue: false,
     },
     recipientsNum: {
       type: Sequelize.INTEGER,
