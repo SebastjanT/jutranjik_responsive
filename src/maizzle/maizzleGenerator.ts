@@ -1,4 +1,3 @@
-const fs = require('fs');
 const Maizzle = require('@maizzle/framework');
 const tailwindConf = require('./config/tailwind.config');
 const maizzleConf = require('./config/maizzle.config');
@@ -35,11 +34,14 @@ module.exports = class maizzleGenerator {
 
   public nodemailerTransport: any;
 
-  constructor(store: any, logger: any, plaintext: boolean, nodemailerTransport: any) {
+  public fs: any;
+
+  constructor(store: any, logger: any, plaintext: boolean, nodemailerTransport: any, fs: any) {
     this.store = store;
     this.logger = logger;
     this.plaintext = plaintext;
     this.nodemailerTransport = nodemailerTransport;
+    this.fs = fs;
   }
 
   //  Sending function
@@ -72,9 +74,9 @@ module.exports = class maizzleGenerator {
   async afterMaizzleRender(html: string, text: string, filename: string) {
     //  Depending on the environmental settings and maizzle success save the email
     //  Check if generations directory exists
-    if (!fs.existsSync('./data/generations')) {
+    if (!this.fs.existsSync('./data/generations')) {
       try {
-        fs.mkdirSync('./data/generations', { recursive: true });
+        this.fs.mkdirSync('./data/generations', { recursive: true });
       } catch (err) {
         this.logger.error({
           message: err,
@@ -84,7 +86,7 @@ module.exports = class maizzleGenerator {
     }
     if (html) {
       try {
-        fs.writeFileSync(`./data/generations/${filename}.html`, html);
+        this.fs.writeFileSync(`./data/generations/${filename}.html`, html);
       } catch (err) {
         this.logger.error({
           message: err,
@@ -99,7 +101,7 @@ module.exports = class maizzleGenerator {
     }
     if (this.plaintext && text) {
       try {
-        fs.writeFileSync(`./data/generations/${filename}.txt`, text);
+        this.fs.writeFileSync(`./data/generations/${filename}.txt`, text);
       } catch (err) {
         this.logger.error({
           message: err,
@@ -123,7 +125,7 @@ module.exports = class maizzleGenerator {
     generationMaizzle.filename = `jutranjik${generationMaizzle.generationTimeStart.getTime()}`;
     try {
       // Read the template and start the mazzle jutranjik generation process
-      const data = fs.readFileSync('./src/maizzle/templates/jutranjik_responsive.html');
+      const data = this.fs.readFileSync('./src/maizzle/templates/jutranjik_responsive.html');
       const template = data.toString();
       try {
         const { html } = await Maizzle.render(
@@ -131,7 +133,7 @@ module.exports = class maizzleGenerator {
           {
             tailwind: {
               config: tailwindConf,
-              css: fs.readFileSync('./src/maizzle/assets/css/main.css'),
+              css: this.fs.readFileSync('./src/maizzle/assets/css/main.css'),
             },
             maizzle: maizzleConf,
             // eslint-disable-next-line no-shadow
@@ -164,7 +166,7 @@ module.exports = class maizzleGenerator {
           //  After a successful save finish up the generation and if enabled send the email
           generationMaizzle.generationTimeEnd = new Date();
           generationMaizzle.lineCountAfter = html.split(/\r\n|\r|\n/).length;
-          generationMaizzle.fileSize = fs.statSync(`./data/generations/${generationMaizzle.filename}.html`).size;
+          generationMaizzle.fileSize = this.fs.statSync(`./data/generations/${generationMaizzle.filename}.html`).size;
           if (send) {
             generationMaizzle.isPublic = send;
             //  Backup address that the email will be delivered to as a notification of a problem

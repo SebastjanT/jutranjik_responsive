@@ -12,9 +12,11 @@ module.exports = {
   },
 
   Mutation: {
-    requestGeneration: async (_: any, { generator }: any, context: any) => {
+    requestGeneration: async (_: any, { generator, send }: any, context: any) => {
       //  Call to dataSource generationsAPI
-      const generation = await context.dataSources.generationsAPI.startGeneration({ generator });
+      const generation = await context.dataSources.generationsAPI.startGeneration(
+        { generator, send },
+      );
       return generation;
     },
   },

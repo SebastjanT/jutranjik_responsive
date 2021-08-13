@@ -17,10 +17,11 @@ type Generation = {
 }
 
 module.exports = class GenerationsAPI extends DataSource {
-  constructor({ store, maizzleGenerator }: any) {
+  constructor({ store, maizzleGenerator, mjmlGenerator }: any) {
     super();
     this.store = store;
     this.maizzleGenerator = maizzleGenerator;
+    this.mjmlGenerator = mjmlGenerator;
   }
 
   initialize(config: any) {
@@ -34,12 +35,12 @@ module.exports = class GenerationsAPI extends DataSource {
   }
 
   //  Function that starts the generation process manually
-  async startGeneration({ generator }: any = {}) {
+  async startGeneration({ generator, send }: any = {}) {
     if (generator === 'Maizzle') {
-      return this.maizzleGenerator.runMaizzle(false);
+      return this.maizzleGenerator.runMaizzle(send);
     }
     if (generator === 'mjml') {
-      return null;
+      return this.mjmlGenerator.runMjml(send);
     }
     return null;
   }

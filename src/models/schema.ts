@@ -9,7 +9,7 @@ module.exports = gql`
   }
 
   type Mutation{
-    requestGeneration(generator: String!): Generation
+    requestGeneration(generator: String!, send: Boolean!): Generation
   }
 
   type Generation {

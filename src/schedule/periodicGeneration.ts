@@ -2,6 +2,7 @@ module.exports = async function periodicGeneration(
   fireDate: Date,
   logger: any,
   maizzleGenerator: any,
+  mjmlGenerator: any,
 ) {
   logger.info({
     message: 'Email generation started!',
@@ -15,7 +16,7 @@ module.exports = async function periodicGeneration(
   if (process.env.GENERATOR === 'Maizzle') {
     result = await maizzleGenerator.runMaizzle(process.env.SEND === 'true');
   } else if (process.env.GENERATOR === 'mjml') {
-    console.log('Here mjml generation will execute');
+    result = await mjmlGenerator.runMjml(process.env.SEND === 'true');
   }
 
   if (result) {
