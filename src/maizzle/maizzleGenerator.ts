@@ -176,6 +176,8 @@ module.exports = class maizzleGenerator {
               console.log('API');
               maillist = '';
             }
+            //  Get and save the number of recipients
+            generationMaizzle.recipientsNum = maillist.split(',').length;
             this.maizzleSend(maillist, generationMaizzle.title ? generationMaizzle.title : '', html, text);
           }
           //  Store the generation to the database
