@@ -124,7 +124,7 @@ module.exports = class maizzleGenerator {
     generationMaizzle.generationTimeStart = new Date();
     generationMaizzle.filename = `jutranjik${generationMaizzle.generationTimeStart.getTime()}`;
     try {
-      // Read the template and start the mazzle jutranjik generation process
+      //  Read the template and start the mazzle jutranjik generation process
       const data = this.fs.readFileSync('./src/maizzle/templates/jutranjik_responsive.html');
       const template = data.toString();
       try {
@@ -161,7 +161,7 @@ module.exports = class maizzleGenerator {
           const { plaintext } = await Maizzle.plaintext(html);
           text = plaintext;
         }
-        // Save the generated html and plaintext files to the filesystem
+        //  Save the generated html and plaintext files to the filesystem
         if (await this.afterMaizzleRender(html, text, generationMaizzle.filename)) {
           //  After a successful save finish up the generation and if enabled send the email
           generationMaizzle.generationTimeEnd = new Date();
@@ -178,7 +178,7 @@ module.exports = class maizzleGenerator {
             }
             this.maizzleSend(maillist, generationMaizzle.title ? generationMaizzle.title : '', html, text);
           }
-          // Store the generation to the database
+          //  Store the generation to the database
           const storeOperation = await this.store.Generations.create(generationMaizzle);
           if (!storeOperation.dataValues) {
             return null;
