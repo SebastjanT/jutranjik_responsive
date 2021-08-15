@@ -3,10 +3,6 @@ module.exports = {
   build: {
     templates: {
       source: 'src/maizzle/templates',
-      assets: {
-        source: 'src/maizzle/assets/images',
-        destination: 'images',
-      },
     },
     tailwind: {
       css: 'src/maizzle/assets/css/main.css',
