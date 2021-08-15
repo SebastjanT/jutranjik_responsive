@@ -1,4 +1,5 @@
 const mjml2html = require('mjml');
+const pug = require('pug');
 
 type toFrom = {
   dan: string,
@@ -112,10 +113,10 @@ module.exports = class mjmlGenerator {
     } else {
       return {
         title: 'jutranjik_responsive',
-        preview: 'Jutranjik maizzle responsive template.',
+        preview: 'Jutranjik mjml responsive template.',
         date: '11. avgust 2021',
-        glava: '**Ta del naj bo del GLAVE**, torej templejta, in naj se prikazuje le, če je v uporabi: Če se vanj nič ne vnese, se ne prikaže. Če se vanj kaj vnese, se prikazuje tako dolgo, dokler se tega v templejtu ne zbirše ven. Le za tekst in hiperpovezave - če je možno tudi za slike, pa tudi nič narobe.',
-        noga: '**Ta del naj bo del NOGE, torej templejta**, in naj se prikazuje le, če je v uporabi: Če se vanj nič ne vnese, se ne prikaže. Če se vanj kaj vnese, se prikazuje tako dolgo, dokler se tega v templejtu ne zbirše ven. Le za tekst in hiperpovezave - če je možno tudi za slike, pa tudi nič narobe.',
+        glava: '<strong>Ta del naj bo del GLAVE</strong>, torej templejta, in naj se prikazuje le, če je v uporabi: Če se vanj nič ne vnese, se ne prikaže. Če se vanj kaj vnese, se prikazuje tako dolgo, dokler se tega v templejtu ne zbirše ven. Le za tekst in hiperpovezave - če je možno tudi za slike, pa tudi nič narobe.',
+        noga: '<strong>Ta del naj bo del NOGE, torej templejta</strong>, in naj se prikazuje le, če je v uporabi: Če se vanj nič ne vnese, se ne prikaže. Če se vanj kaj vnese, se prikazuje tako dolgo, dokler se tega v templejtu ne zbirše ven. Le za tekst in hiperpovezave - če je možno tudi za slike, pa tudi nič narobe.',
         noviceIntranet: [
           {
             naslov: 'Naslov, ki je malo daljši in se prelomi v dve vrstici ali več',
@@ -243,24 +244,16 @@ module.exports = class mjmlGenerator {
     generationMjml.generationTimeStart = new Date();
     generationMjml.filename = `jutranjik${generationMjml.generationTimeStart.getTime()}`;
     try {
-      // Recieve the news data from the API
+      //  Recieve the news data from the API
       const retrievedDataMjml = this.getData('news');
       generationMjml.title = retrievedDataMjml.title;
-      // Load the mjml template
-      let mjml: Buffer | string = '';
-      try {
-        // Read the template and start the mazzle jutranjik generation process
-        mjml = this.fs.readFileSync('./src/mjml/templates/jutranjik_responsive.mjml');
-      } catch (err) {
-        this.logger.error({
-          message: err,
-        });
-        return null;
-      }
-      mjml = mjml.toString();
-      // Perform the generation
+      //  Load the mjml pug template
+      const pugCompiled = pug.compileFile('./src/mjml/templates/jutranjik_responsive.pug');
+      //  Render the pug template with the retrieved data
+      const mjml = pugCompiled(retrievedDataMjml);
+      //  Perform the generation
       const { html } = mjml2html(`${mjml}`, { beautify: true, minify: true });
-      // Save the generated html file to the filesystem
+      //  Save the generated html file to the filesystem
       if (await this.saveFile(html, generationMjml.filename)) {
         //  After a successful save finish up the generation and if enabled send the email
         generationMjml.generationTimeEnd = new Date();
@@ -278,9 +271,11 @@ module.exports = class mjmlGenerator {
             console.log('API');
             maillist = '';
           }
+          //  Get and save the number of recipients
+          generationMjml.recipientsNum = maillist.split(',').length;
           this.mjmlSend(maillist, generationMjml.title ? generationMjml.title : '', html);
         }
-        // Store the generation to the database
+        //  Store the generation to the database
         const storeOperation = await this.store.Generations.create(generationMjml);
         if (!storeOperation.dataValues) {
           return null;
