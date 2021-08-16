@@ -30,10 +30,16 @@ const maizzleGenerator = new MaizzleGenerator(store, logger, true, nodemailerTra
 //  Create the mjml generator
 const mjmlGenerator = new MjmlGenerator(store, logger, nodemailerTransport, fs);
 
+//  IPs that are cleared for insight mode
+const allowedInsight: string[] = process.env.INSIGHT ? process.env.INSIGHT.split(',') : [];
+
 // Define and create the ApolloServer
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  context: ({ req }: any) => ({
+    insight: allowedInsight.includes((req.headers['x-forwarded-for'] || req.connection.remoteAddress || '').split(',')[0].trim()),
+  }),
   dataSources: () => ({
     generationsAPI: new GenerationsAPI({ store, maizzleGenerator, mjmlGenerator }),
   }),

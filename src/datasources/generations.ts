@@ -29,8 +29,27 @@ module.exports = class GenerationsAPI extends DataSource {
   }
 
   //  Function that fetches all generations from the database
-  async getAllGenerations() {
-    const generations: Generation[] = await this.store.Generations.findAll();
+  async getAllGenerations(insight: boolean) {
+    //  If the user doesn't have insight mode access limit the data retrieved
+    const options = insight ? {} : {
+      where: {
+        isPublic: true,
+      },
+      attributes: {
+        exclude: [
+          'generationTimeStart',
+          'generationTimeEnd',
+          'fileSize',
+          'lineCountBefore',
+          'lineCountAfter',
+          'hasText',
+          'usedGenerator',
+          'actualData',
+          'recipientsNum',
+        ],
+      },
+    };
+    const generations: Generation[] = await this.store.Generations.findAll(options);
     return Array.isArray(generations) ? generations.map((generation) => generation) : [];
   }
 
