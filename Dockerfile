@@ -20,8 +20,6 @@ WORKDIR /app
 
 COPY ["package.json", "package-lock.json*", "start.sh", "./"]
 
-COPY ["package.json", "package-lock.json*", "start.sh", "./"]
-
 RUN npm install --production
 
 COPY --from=builder /build/app/dist ./dist
