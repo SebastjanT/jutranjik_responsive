@@ -20,9 +20,19 @@ WORKDIR /app
 
 COPY ["package.json", "package-lock.json*", "start.sh", "./"]
 
+COPY ["package.json", "package-lock.json*", "start.sh", "./"]
+
 RUN npm install --production
 
 COPY --from=builder /build/app/dist ./dist
+
+COPY ./src/maizzle/assets ./src/maizzle/assets
+
+COPY ./src/maizzle/layouts ./src/maizzle/layouts
+
+COPY ./src/maizzle/templates ./src/maizzle/templates
+
+COPY ./src/mjml/templates ./src/mjml/templates
 
 RUN chmod u+x ./start.sh
 

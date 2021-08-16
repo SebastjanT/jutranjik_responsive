@@ -77,5 +77,5 @@ docker build --tag jutranjik_responsive .
 Here is an example command to run the container as intended:
 
 ```
-docker run -dp 4000:4000 -v jutranjik_responsive_data:/app/data --env-file ./.env --name jutranjik_responsive --init st1925/jutranjik_responsive:tagname
+docker run -dp 127.0.0.1:4000:4000 -v jutranjik_responsive_data:/app/data --env-file ./.env --name jutranjik_responsive --init st1925/jutranjik_responsive:tagname
 ```
