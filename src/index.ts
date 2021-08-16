@@ -38,7 +38,7 @@ const server = new ApolloServer({
   typeDefs,
   resolvers,
   context: ({ req }: any) => ({
-    insight: allowedInsight.includes((req.headers['x-forwarded-for'] || req.connection.remoteAddress || '').split(',')[0].trim()),
+    insight: allowedInsight.includes((req.headers['x-insight'] || req.connection.remoteAddress || '').split(',')[0].trim()),
   }),
   dataSources: () => ({
     generationsAPI: new GenerationsAPI({ store, maizzleGenerator, mjmlGenerator }),
