@@ -28,10 +28,14 @@ module.exports = {
       role: 'presentation',
     },
   },
+  purgeCSS: {
+    safelist: ['moz-text-html'],
+  },
   prettify: {
     enabled: true,
   },
   removeUnusedCSS: {
     enabled: true,
+    whitelist: ['.moz-text-html*'],
   },
 };
