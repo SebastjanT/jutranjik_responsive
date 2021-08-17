@@ -144,7 +144,6 @@ module.exports = class maizzleGenerator {
                 console.log('API');
               }
               // eslint-disable-next-line no-param-reassign
-              config.title = 'jutranjik_responsive';
               generationMaizzle.title = config.title;
               return html;
             },
