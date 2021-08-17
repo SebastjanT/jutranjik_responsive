@@ -112,7 +112,7 @@ module.exports = class mjmlGenerator {
       }
     } else {
       return {
-        title: 'jutranjik_responsive',
+        title: 'Jutranjik newsletter - mjml test data',
         preview: 'Jutranjik mjml responsive template.',
         date: '11. avgust 2021',
         glava: '<strong>Ta del naj bo del GLAVE</strong>, torej templejta, in naj se prikazuje le, če je v uporabi: Če se vanj nič ne vnese, se ne prikaže. Če se vanj kaj vnese, se prikazuje tako dolgo, dokler se tega v templejtu ne zbirše ven. Le za tekst in hiperpovezave - če je možno tudi za slike, pa tudi nič narobe.',
