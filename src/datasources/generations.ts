@@ -37,7 +37,6 @@ module.exports = class GenerationsAPI extends DataSource {
       },
       attributes: {
         exclude: [
-          'generationTimeStart',
           'generationTimeEnd',
           'fileSize',
           'lineCountBefore',
