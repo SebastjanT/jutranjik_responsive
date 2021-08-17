@@ -1,6 +1,6 @@
 {
   "name": "jutranjik_responsive",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Creation of complex responsive email messages",
   "main": "dist/index.js",
   "scripts": {
