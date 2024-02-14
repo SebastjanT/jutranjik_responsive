@@ -7,8 +7,8 @@ on:
     branches: [ microservices_playground ]
 
 jobs:
-  build:
-    name: Build Generator Docker image
+  build_generator:
+    name: Build the Generator Docker image
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -39,3 +39,35 @@ jobs:
           file: ./generator/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/jr-generator:${{ steps.current-time.outputs.formattedTime }}
+  build_mailer:
+    name: Build the Mailer Docker image
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./mailer
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Get current time
+        id: current-time
+        uses: josStorer/get-current-time@v2.0.2
+        with:
+          format: YYYY-MM-DD-HH-mm-ss
+          utcOffset: "+01:00"
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      - name: Login to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v3
+        with:
+          file: ./mailer/Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/jr-mailer:${{ steps.current-time.outputs.formattedTime }}
