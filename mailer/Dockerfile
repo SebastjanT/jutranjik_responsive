@@ -22,10 +22,4 @@ RUN npm install --production
 
 COPY --from=builder /build/app/dist ./dist
 
-COPY ./mailer/src/maizzle/assets ./src/maizzle/assets
-
-COPY ./mailer/src/maizzle/layouts ./src/maizzle/layouts
-
-COPY ./mailer/src/maizzle/templates ./src/maizzle/templates
-
 CMD npm start
