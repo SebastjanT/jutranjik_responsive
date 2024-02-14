@@ -5,9 +5,9 @@ FROM node:latest AS builder
 
 WORKDIR /build/app
 
-COPY ["package.json", "package-lock.json*", "tsconfig.json" , "./"]
+COPY ["generator/package.json", "generator/package-lock.json*", "generator/tsconfig.json" , "./"]
 
-COPY ["./src", "./src"]
+COPY ["./generator/src", "./src"]
 
 RUN npm install && npm run build
 
@@ -16,16 +16,16 @@ FROM node:latest
 
 WORKDIR /app
 
-COPY ["package.json", "package-lock.json*", "./"]
+COPY ["generator/package.json", "generator/package-lock.json*", "./"]
 
 RUN npm install --production
 
 COPY --from=builder /build/app/dist ./dist
 
-COPY ./src/maizzle/assets ./src/maizzle/assets
+COPY ./generator/src/maizzle/assets ./src/maizzle/assets
 
-COPY ./src/maizzle/layouts ./src/maizzle/layouts
+COPY ./generator/src/maizzle/layouts ./src/maizzle/layouts
 
-COPY ./src/maizzle/templates ./src/maizzle/templates
+COPY ./generator/src/maizzle/templates ./src/maizzle/templates
 
 CMD npm start
