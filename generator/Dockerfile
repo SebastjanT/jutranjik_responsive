@@ -28,4 +28,6 @@ COPY ./generator/src/maizzle/layouts ./src/maizzle/layouts
 
 COPY ./generator/src/maizzle/templates ./src/maizzle/templates
 
+EXPOSE 4000
+
 CMD npm start
