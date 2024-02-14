@@ -14,11 +14,9 @@ RUN npm install && npm run build
 # Production stage
 FROM node:latest
 
-RUN export DEBIAN_FRONTEND=noninteractive && apt-get update && apt-get install -y --no-install-recommends postfix
-
 WORKDIR /app
 
-COPY ["package.json", "package-lock.json*", "start.sh", "./"]
+COPY ["package.json", "package-lock.json*", "./"]
 
 RUN npm install --production
 
@@ -30,8 +28,4 @@ COPY ./src/maizzle/layouts ./src/maizzle/layouts
 
 COPY ./src/maizzle/templates ./src/maizzle/templates
 
-COPY ./src/mjml/templates ./src/mjml/templates
-
-RUN chmod u+x ./start.sh
-
-CMD ./start.sh
+CMD npm start

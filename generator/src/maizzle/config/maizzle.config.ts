@@ -1,4 +1,4 @@
-module.exports = {
+const maizzleConf = {
   env: 'jutranjik',
   build: {
     templates: {
@@ -28,14 +28,14 @@ module.exports = {
       role: 'presentation',
     },
   },
-  purgeCSS: {
-    safelist: ['moz-text-html'],
-  },
   prettify: {
     enabled: true,
   },
   removeUnusedCSS: {
-    enabled: true,
     whitelist: ['.moz-text-html*'],
+    doNotRemoveHTMLCommentsWhoseOpeningTagContains: ['[if', '[endif'],
   },
+  filters: {}
 };
+
+export default maizzleConf;

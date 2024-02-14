@@ -138,17 +138,13 @@ module.exports = {
         extrabold: 800,
         black: 900,
       },
-      inset: {
-        0: 0,
-        auto: 'auto',
-      },
       letterSpacing: {
         tight: '-1px',
         normal: '0',
         wide: '1px',
         loose: '4px',
       },
-      lineHeight: (theme: any) => ({
+      lineHeight: (theme) => ({
         ...theme('spacing'),
         none: '1',
         tight: '1.25',
@@ -163,7 +159,7 @@ module.exports = {
         disc: 'disc',
         decimal: 'decimal',
       },
-      margin: (theme: any, { negative }: any) => ({
+      margin: (theme, { negative }) => ({
         auto: 'auto',
         ...theme('spacing'),
         ...negative(theme('spacing')),
@@ -194,12 +190,7 @@ module.exports = {
         '10/12': '83.333333%',
         '11/12': '91.666667%',
       }),
-      maxHeight: (theme: any) => ({
-        ...theme('spacing'),
-        full: '100%',
-        screen: '100vh',
-      }),
-      maxWidth: (theme: any, { breakpoints }: any) => ({
+      maxWidth: (theme, { breakpoints }) => ({
         none: 'none',
         ...theme('spacing'),
         ...breakpoints(theme('screens')),
@@ -231,23 +222,23 @@ module.exports = {
         '11/12': '91.666667%',
         full: '100%',
       }),
-      minHeight: (theme: any) => ({
+      minHeight: (theme) => ({
         ...theme('spacing'),
         full: '100%',
         screen: '100vh',
       }),
-      minWidth: (theme: any) => ({
+      minWidth: (theme) => ({
         ...theme('spacing'),
         full: '100%',
         screen: '100vw',
       }),
-      padding: (theme: any) => theme('spacing'),
-      space: (theme: any, { negative }: any) => ({
+      padding: (theme) => theme('spacing'),
+      space: (theme, { negative }) => ({
         ...theme('spacing'),
         ...negative(theme('spacing')),
       }),
-      textColor: (theme: any) => theme('colors'),
-      width: (theme: any) => ({
+      textColor: (theme) => theme('colors'),
+      width: (theme) => ({
         auto: 'auto',
         ...theme('spacing'),
         '1/2': '50%',
@@ -281,5 +272,14 @@ module.exports = {
         '47pc': '47%',
       }),
     },
+  },
+  corePlugins: {
+    preflight: false,
+    backgroundOpacity: false,
+    borderOpacity: false,
+    boxShadow: false,
+    divideOpacity: false,
+    placeholderOpacity: false,
+    textOpacity: false,
   },
 };

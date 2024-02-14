@@ -1,6 +1,4 @@
-const { gql } = require('apollo-server');
-
-module.exports = gql`
+const schema = `#graphql
 
   scalar Date
 
@@ -15,7 +13,8 @@ module.exports = gql`
   type Generation {
     id: ID!
     title: String
-    filename: String
+    generationHTML: String
+    generationText: String
     generationTimeStart: Date
     generationTimeEnd: Date
     fileSize: Int
@@ -24,7 +23,8 @@ module.exports = gql`
     hasText: Boolean
     usedGenerator: String
     actualData: Boolean
-    recipientsNum: Int
     isPublic: Boolean
   }
 `;
+
+export default schema;

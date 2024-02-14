@@ -1,10 +1,11 @@
-const Maizzle = require('@maizzle/framework');
-const tailwindConf = require('./config/tailwind.config');
-const maizzleConf = require('./config/maizzle.config');
+import Maizzle from '@maizzle/framework';
+// import tailwindConf from './config/tailwind.config.js';
+import maizzleConf from './config/maizzle.config.js';
 
 type GenerationMaizzle = {
     title?: string,
-    filename?: string,
+    generationHTML?: string,
+    generationText?: string,
     generationTimeStart?: Date,
     generationTimeEnd?: Date,
     fileSize?: number,
@@ -13,7 +14,6 @@ type GenerationMaizzle = {
     hasText?: boolean,
     usedGenerator?: string,
     actualData?: boolean,
-    recipientsNum?: number,
     isPublic?: boolean,
 }
 
@@ -25,26 +25,27 @@ type MailOptionsMaizzle = {
   text?: string,
 }
 
-module.exports = class maizzleGenerator {
+export class MaizzleGenerator {
   public store: any;
 
   public logger: any;
 
   public plaintext: boolean;
 
-  public nodemailerTransport: any;
+  //public nodemailerTransport: any;
 
   public fs: any;
 
-  constructor(store: any, logger: any, plaintext: boolean, nodemailerTransport: any, fs: any) {
-    this.store = store;
+  constructor(Generations: any, logger: any, plaintext: boolean, fs: any) {
+    this.store = Generations;
     this.logger = logger;
     this.plaintext = plaintext;
-    this.nodemailerTransport = nodemailerTransport;
+    //this.nodemailerTransport = nodemailerTransport;
     this.fs = fs;
   }
 
   //  Sending function
+  /*
   maizzleSend(maillist: string, subject: string, html: string, text: string) {
     //  Email options
     const mailOptions: MailOptionsMaizzle = {
@@ -69,6 +70,7 @@ module.exports = class maizzleGenerator {
       }
     });
   }
+  */
 
   //  Save the html and text files the maizzle render process
   async afterMaizzleRender(html: string, text: string, filename: string) {
@@ -122,7 +124,7 @@ module.exports = class maizzleGenerator {
     generationMaizzle.usedGenerator = 'Maizzle';
     generationMaizzle.hasText = this.plaintext;
     generationMaizzle.generationTimeStart = new Date();
-    generationMaizzle.filename = `jutranjik${generationMaizzle.generationTimeStart.getTime()}`;
+    const filename = `jutranjik`;
     try {
       //  Read the template and start the mazzle jutranjik generation process
       const data = this.fs.readFileSync('./src/maizzle/templates/jutranjik_responsive.html');
@@ -132,7 +134,7 @@ module.exports = class maizzleGenerator {
           template,
           {
             tailwind: {
-              config: tailwindConf,
+              config: './src/maizzle/config/tailwind.config.js',
               css: this.fs.readFileSync('./src/maizzle/assets/css/main.css'),
             },
             maizzle: maizzleConf,
@@ -155,17 +157,20 @@ module.exports = class maizzleGenerator {
           },
         );
         //  Generate the plaintext version
-        let text = null;
+        let text = "";
         if (this.plaintext) {
           const { plaintext } = await Maizzle.plaintext(html);
           text = plaintext;
         }
         //  Save the generated html and plaintext files to the filesystem
-        if (await this.afterMaizzleRender(html, text, generationMaizzle.filename)) {
+        if (await this.afterMaizzleRender(html, text, filename)) {
           //  After a successful save finish up the generation and if enabled send the email
           generationMaizzle.generationTimeEnd = new Date();
           generationMaizzle.lineCountAfter = html.split(/\r\n|\r|\n/).length;
-          generationMaizzle.fileSize = this.fs.statSync(`./data/generations/${generationMaizzle.filename}.html`).size;
+          generationMaizzle.fileSize = this.fs.statSync(`./data/generations/${filename}.html`).size;
+          // Save the generated HTML and Text to the database
+          generationMaizzle.generationHTML = html;
+          generationMaizzle.generationText = text;
           if (send) {
             generationMaizzle.isPublic = send;
             //  Backup address that the email will be delivered to as a notification of a problem
@@ -176,15 +181,15 @@ module.exports = class maizzleGenerator {
               maillist = '';
             }
             //  Get and save the number of recipients
-            generationMaizzle.recipientsNum = maillist.split(',').length;
-            this.maizzleSend(maillist, generationMaizzle.title ? generationMaizzle.title : '', html, text);
+            //generationMaizzle.recipientsNum = maillist.split(',').length;
+            //this.maizzleSend(maillist, generationMaizzle.title ? generationMaizzle.title : '', html, text);
           }
           //  Store the generation to the database
-          const storeOperation = await this.store.Generations.create(generationMaizzle);
-          if (!storeOperation.dataValues) {
+          const storeOperation = await this.store.create(generationMaizzle);
+          if (!storeOperation) {
             return null;
           }
-          return storeOperation.dataValues;
+          return storeOperation;
         }
       } catch (error) {
         this.logger.error({

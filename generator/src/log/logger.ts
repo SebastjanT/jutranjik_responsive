@@ -1,6 +1,6 @@
-const { createLogger, format, transports } = require('winston');
+import { createLogger, format, transports } from 'winston';
 
-const loggerConf = createLogger({
+export const logger = createLogger({
   level: 'info',
   format: format.json(),
   defaultMeta: { service: 'jutranjik_responsive' },
@@ -14,7 +14,7 @@ const loggerConf = createLogger({
 });
 
 if (process.env.NODE_ENV !== 'production') {
-  loggerConf.add(new transports.Console({
+  logger.add(new transports.Console({
     handleExceptions: true,
     format: format.combine(
       format.colorize(),
@@ -22,5 +22,3 @@ if (process.env.NODE_ENV !== 'production') {
     ),
   }));
 }
-
-module.exports = loggerConf;
