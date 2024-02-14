@@ -30,7 +30,7 @@ module.exports = async function periodicGeneration(
 
   logger.error({
     message: 'Email generation failed!',
-    startTime: new Date(),
+    endTime: new Date(),
     generator: process.env.GENERATOR,
   });
 };
