@@ -78,8 +78,7 @@ app.use(
   express.json(),
   expressMiddleware(server, {
     context: async ({ req }) => {
-      const insight = allowedInsight.includes((<string>req.headers['x-Forwarded-For'] || req.socket.remoteAddress || '').split(',')[0].trim());
-      logger.info({message: (<string>req.headers['x-forwarded-for'] || req.socket.remoteAddress || '').split(',')[0].trim()});
+      const insight = allowedInsight.includes((<string>req.headers['x-forwarded-for'] || req.socket.remoteAddress || '').split(',')[0].trim());
       return {
         dataSources: {
           generationsAPI: new GenerationsAPI({ Generations, maizzleGenerator, insight }),
